@@ -1,16 +1,17 @@
 import express from "express";
+import { readStudents } from "./src/student.js";
 
 const app = express();
 const port = 3333;
 
 //root route
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Página inicial da nossa aplicação de NodeJs + Express + Mysql!");
 });
 
 //listando todos os alunos
 app.get("/alunos", (req, res) => {
-  res.send("Página de alunos!");
+  readStudents(res);
 });
 
 //listando um aluno

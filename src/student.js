@@ -47,3 +47,15 @@ export function readOneStudent(idAluno, res) {
     }
   });
 }
+
+export function deleteStudent(idAluno, res) {
+  const sql = "DELETE FROM alunos WHERE id = ?";
+
+  connectionDb.query(sql, idAluno, (erro, result) => {
+    if (erro) {
+      res.status(400).json(erro.message);
+    } else {
+      res.status(200).json({ status: "Aluno excluido com sucesso", idAluno });
+    }
+  });
+}

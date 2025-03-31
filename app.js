@@ -1,5 +1,10 @@
 import express from "express";
-import { readStudents, insertStudent, readOneStudent } from "./src/student.js";
+import {
+  readStudents,
+  insertStudent,
+  readOneStudent,
+  deleteStudent,
+} from "./src/student.js";
 
 const app = express();
 const port = 3333;
@@ -39,7 +44,9 @@ app.patch("/alunos/:id", (req, res) => {
 
 //deletando um aluno
 app.delete("/alunos/:id", (req, res) => {
-  res.send("Excluindo aluno");
+  const idStudent = parseInt(req.params.id);
+
+  deleteStudent(idStudent, res);
 });
 
 app.listen(port, () => {

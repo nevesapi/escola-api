@@ -18,3 +18,32 @@ export function readStudents(res) {
     }
   });
 }
+
+export function insertStudent(aluno, res) {
+  const sql = "INSERT INTO alunos SET ?";
+  connectionDb.query(sql, aluno, (erro) => {
+    if (erro) {
+      res.status(400).json(erro.code);
+    } else {
+      res.status(201).json({ status: "Aluno inserido" });
+    }
+  });
+}
+
+export function readOneStudent(idAluno, res) {
+  const sql = `SELECT * FROM alunos WHERE id = ?`;
+  connectionDb.query(sql, idAluno, (erro, result) => {
+    if (result === 0) {
+      res.send(204).end();
+      return;
+    }
+
+    if (erro) {
+      res.status(400).json(erro.code);
+      console.error(`Erro ao listar aluno. Erro: ${erro.message}`);
+      return;
+    } else {
+      res.status(200).json(result);
+    }
+  });
+}

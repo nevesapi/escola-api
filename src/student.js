@@ -43,7 +43,7 @@ export function readOneStudent(idAluno, res) {
       console.error(`Erro ao listar aluno. Erro: ${erro.message}`);
       return;
     } else {
-      res.status(200).json(result);
+      res.status(200).json(result[0]);
     }
   });
 }
@@ -58,4 +58,24 @@ export function deleteStudent(idAluno, res) {
       res.status(200).json({ status: "Aluno excluido com sucesso", idAluno });
     }
   });
+}
+
+export function updateStudent(idAluno, nome, primeira, segunda, res) {
+  const sql =
+    "UPDATE alunos SET nome = ?, primeira = ?, segunda = ? WHERE id = ?";
+
+  connectionDb.query(
+    sql,
+    [nome, primeira, segunda, idAluno],
+    (erro, result) => {
+      if (erro) {
+        console.error("Erro ao atualizar aluno:", erro);
+        return res.status(400).json(erro.message);
+      } else {
+        console.log("Resultado: ", result);
+
+        return res.status(200).json(result);
+      }
+    }
+  );
 }

@@ -12,9 +12,7 @@ export const routes = [
     method: "get",
     path: "/",
     handler: (req, res) => {
-      res.send(
-        "Página inicial da nossa aplicação de NodeJs + Express + Mysql!"
-      );
+      res.redirect("https://escola-api-pinto.onrender.com");
     },
   },
   {
